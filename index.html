@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<style type="text/css">
+			input {
+				width: 400px;
+				height: 37px;
+				margin-bottom: 10px;
+				display: block;
+			}
+
+			.result {
+				margin-top: 20px;
+			}
+		</style>
+
+		<h1>Построение треугольника</h1>
+
+		<input type="text" placeholder="Введите длину стороны 1" id="side-1"/>
+		<input type="text" placeholder="Введите длину стороны 2" id="side-2"/>
+		<input type="text" placeholder="Введите длину стороны 3" id="side-3"/>
+		<button onClick="handle()">
+			Вычислить
+		</button>
+		<div class="result" id="result"></div>
+
+		<script type="text/javascript">
+			function validateValue(value)
+			{
+				if (value > 0) {
+					return true;
+				}
+				return false;
+			}
+
+			function getValue(id)
+			{
+				var value = document.getElementById(id).value;
+				return parseFloat(value);
+			}
+
+			function setResult(text)
+			{
+				document.getElementById('result').innerText = text;
+			}
+
+			function handle()
+			{
+				var side1 = getValue('side-1');
+				var side2 = getValue('side-2');
+				var side3 = getValue('side-3');
+
+				var valid = true;
+
+				valid = valid && validateValue(side1);
+				valid = valid && validateValue(side2);
+				valid = valid && validateValue(side3);
+
+				if (valid) {
+					if ((side1 + side2 > side3) && (side2 + side3 > side1) && (side1 + side3 > side2)) {
+						setResult('Построение треугольника с заданными сторонами возможно');
+					} else {
+						setResult('Построение треугольника с заданными сторонами невозможно');
+					}
+				} else {
+					setResult('Укажите корректные данные');
+				}
+
+				return false;
+			}
+		</script>
+	</body>
+</html>
